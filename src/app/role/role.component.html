@@ -1,0 +1,117 @@
+<div class="container">
+
+  <div  class="row" >
+
+    <div class ="col-sm-3   mt-5 ">
+      <ul class="sidebar navbar-nav">
+        <li class="nav-item  deep-blue-gradient d-flex justify-content-center">
+          <a class="nav-link"  > <h5>
+            <i class="fa fa-anchor fa-lg" aria-hidden="true"></i>&nbsp;
+           <span class="badge">Gestion des Roles</span></h5>
+          </a>
+        </li>
+
+
+        <mat-expansion-panel class="mat-active mt-2" >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Roles
+            </mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <a  (click)="showRoleForm()"> <h6 class=""><i class="fa fa-plus-square fa-lg" aria-hidden="true"></i>&nbsp;Add New Role</h6></a>
+          <form class="my-2 input-group" *ngIf="roleform" [formGroup]="roleForm">
+            <mat-form-field class="">
+              <input matInput type="text" placeholder=" Role Name" autofocus formControlName="roleName">
+            </mat-form-field >
+             <button mat-button class="btn input-group-append btn-sm btn-success"
+                    (click)="ajouterRole()"
+                    [disabled]="roleForm.pristine||roleForm.invalid"
+
+             > Ajouter</button>
+           </form>
+          <div class="list-group">
+            <a *ngFor="let role of roles"
+
+               class="list-group-item"  ><i class="fa fa-circle-o-notch " aria-hidden="true"></i>&nbsp;
+              <small> {{role.roleName |uppercase}}</small>
+             </a>
+
+          </div>
+
+
+        </mat-expansion-panel>
+        <mat-card *ngIf="addform" class=" bg-info">
+          <mat-card-header>  </mat-card-header>
+          <mat-card-content>
+            <form  >
+              <mat-form-field>
+                <input type="text" matInput placeholder="Selectionner un membre" autofocus [matAutocomplete]="auto">
+              </mat-form-field>
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option
+                  *ngFor="let membre of membres"
+                  [value]="membre.id"
+                >
+                  <a (click)="closeform(membre.id)"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    {{membre.nom+' '+membre.prenom}}
+                  </a>
+                </mat-option>
+              </mat-autocomplete>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </ul>
+    </div>
+    <div class="col-lg-8 col-md-7 col-sm-5 pt-2 m-auto mt-4" >
+        <div class="mt-4"
+          *ngFor="let role of roles"
+        >
+      <h3> <i class="fa fa-tasks" aria-hidden="true"></i> {{role.roleName|uppercase}} Table </h3>
+    <table class="table table-hover  table-responsive-sm table-bordered">
+      <thead>
+      <tr>
+        <th scope="col" class="text-center">Cin</th>
+        <th class="text-center">Nom</th>
+        <th  class="text-center">Prenom</th>
+        <th  class="text-center">Email</th>
+        <th  class="text-center">
+           <button  class="btn peach-gradient"
+           (click)="showAddForm(role.id)"
+           ><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;ADD</button>
+
+        </th>
+      </tr>
+      </thead>
+
+
+
+      <tbody >
+
+
+      <tr *ngFor="let membre of roleMembersMap[role.id]">
+        <th scope="row" class="text-center">{{membre.cin}}</th>
+        <td class="text-center">{{membre.nom}}</td>
+        <td class="text-center">{{membre.prenom}}</td>
+        <td class="text-center">{{membre.email}}</td>
+        <td class=" text-center">
+          <a class="btn juicy-peach-gradient ml-2 "
+             (click)="deleteMembreFromRole(role.id,membre.id)"
+          ><i class="fa fa-trash fa-lg" aria-hidden="true"></i>&nbsp;</a>
+
+        </td>
+      </tr>
+      </tbody>
+    </table>
+      <div *ngIf="!load" class="mx-auto">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+  </div>
+
+
+
+</div>
+</div>
+</div>

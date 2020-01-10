@@ -1,0 +1,114 @@
+
+<div class="row ">
+  <div class="col-lg-8">
+    <div class="row ">
+      <div class=" col-lg-4 m-3 ">
+        <select class="custom-select custom-select-lg" id="inputGroupSelect01"
+(change)="loadChoise()"
+[(ngModel)]="membretype"
+        >
+          <option class="align-content-center rounded" value="0"  >All Members  </option>
+          <option class="align-content-center rounded" value="1" selected >Enseignants</option>
+          <option class="align-content-center rounded" value="2">Etudiants</option>
+        </select>
+      </div>
+
+    </div>
+
+
+
+    <div  class="row ml-4">
+      <table class="table table-hover  table-responsive-sm table-bordered">
+        <thead>
+        <tr>
+          <th scope="col" class="text-center">Cin</th>
+          <th class="text-center">Nom</th>
+          <th  class="text-center">Prenom</th>
+          <th  class="text-center">Email</th>
+          <th  class="text-center">
+<strong>Actions</strong>          </th>
+        </tr>
+        </thead>
+
+
+
+        <tbody >
+
+
+        <tr *ngFor="let membre of membres">
+          <th scope="row" class="text-center">{{membre.cin}}</th>
+          <td class="text-center">{{membre.nom}}</td>
+          <td class="text-center">{{membre.prenom}}</td>
+          <td class="text-center">{{membre.email}}</td>
+          <td class=" text-center ">
+            <a class=""
+               (click)="editMembre(membre.id)"
+            ><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a>
+            <a class="ml-3"
+               (click)="deleteMembre(membre.id)"
+            ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div *ngIf="load" class="mx-auto">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-lg-4 ">
+
+    <div class="card mt-4  mr-3">
+    <div class="card-header bg-info">
+      Ajouter un Membre
+    </div>
+
+    <div class="card-body">
+
+      <form [formGroup]="membreForm">
+
+
+        <div class="form-group">
+          <input type="number" class="form-control" formControlName="cin" placeholder="CIN">
+        </div>
+
+        <div class="alert alert-danger" *ngIf="membreForm.controls['cin'].invalid &&
+     (membreForm.controls['cin'].touched ||membreForm.controls['cin'].dirty)">
+          Le CIN est Obligatoire
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control"  formControlName="nom" placeholder="Nom ">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control"  formControlName="prenom" placeholder="Prenom ">
+        </div>
+
+        <div class="form-group">
+          <input type="email" class="form-control" formControlName="email" placeholder="Email ">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" formControlName="password"  placeholder="Password ">
+
+         </div>
+
+
+
+
+        <div class="card-footer   bg-transparent">
+          <button type="button" (click)="ajouterMembre()" class="btn btn-success btn-block"
+                  [disabled]="membreForm.pristine||membreForm.invalid"
+          >Ajouter</button>
+
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+  </div>
+
+</div>
