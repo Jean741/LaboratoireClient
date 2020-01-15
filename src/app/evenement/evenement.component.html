@@ -1,2 +1,54 @@
-<p>evenement works!</p>
+<div class="container">
+  <div   class="card mt-5">
+    <div class="card-header">
+      <h5 class="card-title m-auto">Detail de l'Evenement</h5>
 
+    </div>
+    <div class="card-body  ">
+      <form [formGroup]="publicationForm">
+        <div>
+          <mat-form-field >
+            <mat-label> Type </mat-label>
+            <mat-select     formControlName="type"  value="{{publication?.type}}" >
+
+              <mat-option value="Communication">Communication</mat-option>
+              <mat-option value="Sciences">Sciences</mat-option>
+              <mat-option value="Politique" >Politique</mat-option>
+              <mat-option value="Eletroniques et ménagers">Eletroniques et ménagers</mat-option>
+
+            </mat-select>
+
+
+          </mat-form-field>
+
+
+          <div class=" form-group">
+            <label> Lien </label>
+            <input type="text" class="form-control" formControlName="lien" value=" {{publication?.lien}} " placeholder="Lien ">
+          </div>
+          <div class="form-group">
+            <label> Source </label>
+            <input type="text" class="form-control" formControlName="sourcePdf" value=" {{publication?.sourcePdf}} "  placeholder="Source">
+          </div>
+        </div>
+
+      </form>
+
+
+
+      <ul class="list-group list-group-horizontal d-flex justify-content-sm-around mt-2">
+        <li class="list-group-item list-group-item-primary border"
+            (click)="voirMembre(auteur.id)"
+            *ngFor="let auteur of publication?.auteurs "
+        >{{auteur.prenom}}&nbsp;{{auteur.nom|uppercase}}</li>
+
+      </ul>
+    </div>
+    <div class="card-footer d-flex justify-content-around">
+      <button type="button" class="btn col-lg-5 btn-secondary" (click)="annuler()">Annuler</button>
+      <button type="button" class="btn col-lg-5   btn-success" (click)="ajouterPublication()">Publier</button>
+    </div>
+
+  </div>
+
+</div>

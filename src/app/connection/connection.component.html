@@ -2,186 +2,225 @@
 <div class="container">
   <div class="row justify-content-center">
 
+    <!--
+       <div   class="col-lg-5 ">
+
+       <div class="card">
+         <div class="card-header bg-light">
+           <h3> Rejoignez Act-Laboratoire</h3>
+           Connectez vous
+         </div>
+
+         <div class="card-body">
+
+           <form  >
+
+
+             <div class="form-group">
+               <input type="text" class="form-control" [(ngModel)]="username" name="aa" placeholder="CIN">
+             </div>
 
 
 
-    <div *ngIf="compte==0" class="col-lg-7 ">
+             <div class="form-group">
+               <input type="password" class="form-control" [(ngModel)]="password" name="vv" placeholder="Password">
 
-      <div class="card">
-        <div class="card-header bg-light">
-         <h3> Rejoignez Act-Laboratoire</h3>
-          Creez votre compte
-
-          <button mat-fab color="primary" (click)="showAlert()">test the toast</button>
-
-        </div>
-
-        <div class="card-body">
+             </div>
 
 
+             <div class="card-footer bg-transparent">
+               <button type="button" (click)=" connect()" class="btn btn-success btn-block"
+                >Connection</button>
+
+             </div>
+           </form>
+         </div>
+       </div>
+       -->
 
 
-            <div class="form-group d-flex justify-content-lg-start">
 
+  <div *ngIf="compte==0" class="col-lg-7 ">
 
-              <mat-form-field class="col-lg-6">
-                <mat-label>Select an option</mat-label>
-                <mat-select required
-                  [(ngModel)]="membretype"
-                >
-                  <mat-option>None</mat-option>
-                  <mat-option value="1">Enseignant</mat-option>
-                  <mat-option value="2">Etudiant</mat-option>
-                 </mat-select>
-              </mat-form-field>
-            </div>
-
-          <form class="" [formGroup]="membreForm">
-
-
-            <div class="form-group row d-flex justify-content-around ">
-              <input type="text" class="form-control  col-lg-5 " formControlName="cin" placeholder="CIN">
-
-              <input type="email" class="form-control col-lg-5" formControlName="email" placeholder="Email ">
-
-            </div>
-
-            <div class="alert alert-danger col-lg-5" role="alert" *ngIf="membreForm.controls['cin'].invalid &&
-     (membreForm.controls['cin'].touched ||membreForm.controls['cin'].dirty)">
-              Le CIN est Obligatoire
-            </div>
-
-            <div class="form-group row d-flex justify-content-around">
-              <input type="text" class="form-control col-lg-5"  formControlName="nom" placeholder="Nom ">
-
-              <input type="text" class="form-control col-lg-5"  formControlName="prenom" placeholder="Prenom ">
-            </div>
-
-            <div class="form-group">
-            </div>
-
-            <div class="form-group row d-flex justify-content-around ">
-              <input type="password" class="form-control col-lg-5" formControlName="password"  placeholder="Password ">
-              <input type="password" class="form-control col-lg-5" formControlName="password"  placeholder="Confirm   ">
-            </div>
-            <div class="form-group row d-flex justify-content-around">
-
-
-            <mat-form-field>
-              <input matInput type="date" placeholder="Date de Naissance " formControlName="dateNaissance">
-            </mat-form-field >
-
-            <mat-form-field>
-              <input matInput type="text" placeholder="CV " formControlName="cv">
-            </mat-form-field >
-
-            <mat-form-field>
-              <input matInput type="text" placeholder="Foto " formControlName="foto">
-            </mat-form-field >
-
-            </div>
-            <mat-expansion-panel >
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Optional data
-                </mat-panel-title>
-                <mat-panel-description>
-                  Enter your Personal Informations
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-
-              <mat-form-field required class="mx-1"
-                *ngIf="membretype==2"
-              >
-                <input matInput  type="date" placeholder="Date Instricption" formControlName="dateInscription">
-              </mat-form-field >
-
-              <mat-form-field class="mx-1"
-                *ngIf="membretype==2"
-              >
-                <input matInput  type="text" placeholder="Sujet" formControlName="sujet">
-              </mat-form-field>
-
-              <mat-form-field class="mx-1"
-                *ngIf="membretype==2"
-              >
-                <input matInput matNativeControl   type="text" placeholder="Diplome" formControlName="diplome">
-              </mat-form-field>
-
-              <mat-form-field class="mx-1"
-                *ngIf="membretype==1"
-              >
-                <input matInput     type="text" placeholder="Grade" formControlName="grade">
-              </mat-form-field >
-
-              <mat-form-field class="mx-1"
-                *ngIf="membretype==1"
-              >
-                <input matInput     type="text" placeholder="Etablissement" formControlName="etablissement">
-              </mat-form-field>
-            </mat-expansion-panel>
-
-
-            <div class="card-footer bg-transparent">
-              <button type="button" (click)="ajouterMembre()" class="btn btn-success btn-block"
-                      [disabled]="membreForm.pristine||membreForm.invalid"
-              >Envoyer</button>
-
-            </div>
-          </form>
-        </div>
+    <div class="card">
+      <div class="card-header bg-light">
+       <h3> Rejoignez Act-Laboratoire</h3>
+        Creez votre compte
       </div>
 
-      <br>
+      <div class="card-body">
 
-      <h5>Vous avez un compte? <strong> <a href="#" (click)="compte=1">Connectez vous</a></strong></h5>
 
+
+
+          <div class="form-group d-flex justify-content-lg-start">
+
+
+            <mat-form-field class="col-lg-6">
+              <mat-label>Select an option</mat-label>
+              <mat-select required
+                [(ngModel)]="membretype"
+              >
+                <mat-option>None</mat-option>
+                <mat-option value="1">Enseignant</mat-option>
+                <mat-option value="2">Etudiant</mat-option>
+               </mat-select>
+            </mat-form-field>
+          </div>
+
+        <form class="" [formGroup]="membreForm">
+
+
+          <div class="form-group row d-flex justify-content-around ">
+            <input type="text" class="form-control  col-lg-5 " formControlName="cin" placeholder="CIN">
+
+            <input type="email" class="form-control col-lg-5" formControlName="email" placeholder="Email ">
+
+          </div>
+
+          <div class="alert alert-danger col-sm-5" role="alert" *ngIf="membreForm.controls['cin'].invalid &&
+   (membreForm.controls['cin'].touched ||membreForm.controls['cin'].dirty)">
+            Le CIN est Obligatoire
+          </div>
+
+          <div class="form-group row d-flex justify-content-around">
+            <input type="text" class="form-control col-lg-5"  formControlName="nom" placeholder="Nom ">
+
+            <input type="text" class="form-control col-lg-5"  formControlName="prenom" placeholder="Prenom ">
+          </div>
+
+          <div class="form-group">
+          </div>
+
+          <div class="form-group row d-flex justify-content-around ">
+            <input type="password" class="form-control col-lg-5" formControlName="password"  placeholder="Password ">
+            <input type="password" class="form-control col-lg-5" formControlName="password"  placeholder="Confirm   ">
+          </div>
+          <div class="form-group row d-flex justify-content-around">
+
+
+          <mat-form-field>
+            <input matInput type="date" placeholder="Date de Naissance " formControlName="dateNaissance">
+          </mat-form-field >
+
+          <mat-form-field>
+            <input matInput type="text" placeholder="CV " formControlName="cv">
+          </mat-form-field >
+
+          <mat-form-field>
+            <input matInput type="text" placeholder="Foto " formControlName="foto">
+          </mat-form-field >
+
+          </div>
+          <mat-expansion-panel >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Optional data
+              </mat-panel-title>
+              <mat-panel-description>
+                Enter your Personal Informations
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-form-field required class="mx-1"
+              *ngIf="membretype==2"
+            >
+              <input matInput  type="date" placeholder="Date Instricption" formControlName="dateInscription">
+            </mat-form-field >
+
+            <mat-form-field class="mx-1"
+              *ngIf="membretype==2"
+            >
+              <input matInput  type="text" placeholder="Sujet" formControlName="sujet">
+            </mat-form-field>
+
+            <mat-form-field class="mx-1"
+              *ngIf="membretype==2"
+            >
+              <input matInput matNativeControl   type="text" placeholder="Diplome" formControlName="diplome">
+            </mat-form-field>
+
+            <mat-form-field class="mx-1"
+              *ngIf="membretype==1"
+            >
+              <input matInput     type="text" placeholder="Grade" formControlName="grade">
+            </mat-form-field >
+
+            <mat-form-field class="mx-1"
+              *ngIf="membretype==1"
+            >
+              <input matInput     type="text" placeholder="Etablissement" formControlName="etablissement">
+            </mat-form-field>
+          </mat-expansion-panel>
+
+
+          <div class="card-footer bg-transparent">
+            <button type="button" (click)="ajouterMembre()" class="btn btn-success btn-block"
+                    [disabled]="membreForm.pristine||membreForm.invalid"
+            >Envoyer</button>
+
+          </div>
+        </form>
+      </div>
     </div>
 
+    <br>
 
-    <div *ngIf="compte==1" class="col-lg-5 ">
+    <h5>Vous avez un compte? <strong> <a href="#" (click)="compte=1">Connectez vous</a></strong></h5>
 
-      <div class="card">
-        <div class="card-header bg-light">
-          <h3> Rejoignez Act-Laboratoire</h3>
-          Connectez vous
-        </div>
-
-        <div class="card-body">
-
-          <form [formGroup]="connectForm">
+  </div>
 
 
-            <div class="form-group">
-              <input type="text" class="form-control" formControlName="cin" placeholder="CIN">
-            </div>
+  <div *ngIf="compte==1" class="col-lg-5 ">
 
-            <div class="alert alert-danger" *ngIf="connectForm.controls['cin'].invalid &&
-     (connectForm.controls['cin'].touched ||connectForm.controls['cin'].dirty)">
-              Le CIN est Obligatoire
-            </div>
-
-
-            <div class="form-group">
-              <input type="password" class="form-control" formControlName="password"  placeholder="Password ">
-
-            </div>
-
-
-            <div class="card-footer bg-transparent">
-              <button type="button" (click)=" connect()" class="btn btn-success btn-block"
-                      [disabled]="connectForm.pristine||connectForm.invalid"
-              >Connection</button>
-
-            </div>
-          </form>
-        </div>
+    <div class="card">
+      <div class="card-header bg-light">
+        <h3> Rejoignez Act-Laboratoire</h3>
+        Connectez vous
       </div>
 
-      <br>
+      <div class="card-body">
 
-      <h5>Vous n'avez un compte? <strong> <a href="#" (click)="compte=0">Inscrivez vous</a></strong></h5>
+        <form >
 
+
+          <div class="form-group">
+            <input type="text"
+
+                   autofocus
+                   [(ngModel)]="user.cin"
+                   name = "cin"
+                   class="form-control"  placeholder="CIN">
+          </div>
+
+
+
+
+          <div class="form-group">
+            <input type="password"
+                   [(ngModel)]="user.password"
+
+                   name ="password"
+                   class="form-control"   placeholder="Password ">
+
+          </div>
+
+
+          <div class="card-footer bg-transparent">
+            <button type="button" (click)=" connect()"
+                    class="btn btn-success btn-block"
+
+            >Connection</button>
+
+          </div>
+        </form>
+      </div>
     </div>
+
+    <br>
+
+    <h5>Vous n'avez un compte? <strong> <a href="#" (click)="compte=0">Inscrivez vous</a></strong></h5>
+
+  </div>
   </div>
 </div>

@@ -34,6 +34,8 @@ import {
 import {RoleService} from './services/role.service';
 import { HomeComponent } from './home/home.component';
 import {ToastrModule} from 'ngx-toastr';
+import {ConnectionService} from './services/connection.service';
+import {EvenementService} from './services/evenement.service';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,8 @@ import {ToastrModule} from 'ngx-toastr';
     MembreService,
     PublicationService,
     RoleService,
+    ConnectionService,
+    EvenementService,
   ],
 
   bootstrap: [AppComponent],

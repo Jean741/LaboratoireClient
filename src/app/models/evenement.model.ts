@@ -2,8 +2,8 @@
 export class Evenement {
   public id: number;
   public lieu: string;
-  public date: Date;
-
+  public dateEVT: Date;
+  public organisateurs:  any[];
   constructor() {
   }
 }

@@ -1,15 +1,66 @@
 <div class="container ">
   <div class="row">
 
-
-  <h1 class="my-4">Liste des Publications
-
-  </h1>
   </div>
 
-  <div>
+
+  <div class="">
   <div class="row">
+    <div class ="col-sm-3   mt-5 ">
+      <ul class="sidebar navbar-nav">
+        <li class="nav-item  deep-blue-gradient d-flex justify-content-center">
+          <a class="nav-link"  > <h5>
+            <i class="fa fa-anchor fa-lg" aria-hidden="true"></i>&nbsp;
+            <span class="badge">Gestion des Publications</span></h5>
+          </a>
+        </li>
+
+
+        <mat-expansion-panel class="mat-active mt-2" >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Publiications
+            </mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="list-group">
+            <a
+               class="list-group-item"  ><i class="fa fa-circle-o-notch " aria-hidden="true"></i>&nbsp;
+              <small>  Communication</small>
+            </a>
+
+            <a
+              class="list-group-item"  ><i class="fa fa-circle-o-notch " aria-hidden="true"></i>&nbsp;
+              <small>  Sciences</small>
+            </a>
+
+            <a
+              class="list-group-item"  ><i class="fa fa-circle-o-notch " aria-hidden="true"></i>&nbsp;
+              <small>  Politique</small>
+            </a>
+
+            <a
+              class="list-group-item"  ><i class="fa fa-circle-o-notch " aria-hidden="true"></i>&nbsp;
+              <small>  Eletroniques et ménagers</small>
+            </a>
+
+
+          </div>
+
+
+        </mat-expansion-panel>
+
+      </ul>
+    </div>
+
     <div class="col-md-8 m-auto ">
+
+      <h1 class="my-4">Liste des Publications
+
+      </h1>
 
 
 
@@ -30,19 +81,19 @@
           <div class="card-body  ">
             <form [formGroup]="publicationForm">
               <div>
-                <div class="form-group">
-                  <label> Type </label>
-                  <select type="text" class="form-control" formControlName="type" placeholder="Type ">
+                <mat-form-field >
+                  <mat-label> Type </mat-label>
+                  <mat-select     formControlName="type"  >
 
-                    <option>Communication</option>
-                    <option>Sciences</option>
-                    <option>Politique</option>
-                    <option>Eletroniques et ménagers</option>
+                    <mat-option value="Communication">Communication</mat-option>
+                    <mat-option value="Sciences">Sciences</mat-option>
+                    <mat-option value="Politique" >Politique</mat-option>
+                    <mat-option value="Eletroniques et ménagers">Eletroniques et ménagers</mat-option>
 
-                  </select>
+                  </mat-select>
 
 
-                </div>
+                </mat-form-field>
 
 
                 <div class=" form-group">
@@ -53,9 +104,6 @@
                   <label> Source </label>
                   <input type="text" class="form-control" formControlName="sourcePdf" placeholder="Source">
                 </div>
-
-
-
               </div>
 
             </form>
@@ -65,7 +113,7 @@
                 <mat-label>Auteurs</mat-label>
                 <mat-select [formControl]="listAuteurs" multiple>
                   <mat-select-trigger>
-                    {{listAuteurs.value ? membres[listAuteurs.value[0]].nom : ''}}
+                    {{listAuteurs.value ? membres[listAuteurs.value[0]]?.nom : ''}}
                     <span *ngIf="listAuteurs.value?.length > 1" class="example-additional-selection">
         (+{{listAuteurs.value.length - 1}} {{listAuteurs.value?.length === 2 ? 'other' : 'others'}})
       </span>
@@ -77,31 +125,15 @@
 
             </div>
           </div>
-          <div class="card-footer d-flex justify-content-lg-around">
-            <button type="button" class="btn col-lg-2 btn-secondary" (click)="annuler()">Annuler</button>
-            <button type="button" class="btn   btn-success" (click)="ajouterPublication()">Publier</button>
+          <div class="card-footer d-flex justify-content-around">
+            <button type="button" class="btn col-lg-5 btn-secondary" (click)="annuler()">Annuler</button>
+            <button type="button" class="btn col-lg-5   btn-success" (click)="ajouterPublication()">Publier</button>
           </div>
 
         </div>
         <div class="list-group">
 
-          <!--   <div class="card-body">
-               <div class="">
-                 <h5 class="card-title">{{publication.type}}
-                 </h5>
-                 <small class="d-flex justify-content-end"><strong class="border rounded-5"> {{publication.dateApparition|date:"short"}}</strong></small>
 
-                  <a class="card-text" href="{{publication.lien}}">{{publication.lien}} </a>
-                 Uploadef from {{publication.sourcePdf}}
-               </div>
-               <div class="d-flex flex-row-reverse">
-                 <a  class="btn btn-primary ml-3" (click)="editPublication(publication.id)">Modifier</a>
-                 <a  class="btn btn-danger ml-3"
-                 (click)="deletePublication(publication.id)"
-                 >Supprimer</a>
-
-               </div>
-             </div> -->
 
 
 
@@ -135,6 +167,7 @@
             <mat-expansion-panel class="mat-active mt-2" >
               <mat-expansion-panel-header>
                 <mat-panel-title>
+                  <i class="fa fa-users" aria-hidden="true"></i>&nbsp;
                   Auteurs
                 </mat-panel-title>
                 <mat-panel-description>
@@ -143,6 +176,7 @@
               </mat-expansion-panel-header>
               <ul class="list-group list-group-horizontal d-flex justify-content-sm-around">
                 <li class="list-group-item list-group-item-primary border"
+                    (click)="voirMembre(auteur.id)"
                 *ngFor="let auteur of publication.auteurs "
                 >{{auteur.prenom}}&nbsp;{{auteur.nom|uppercase}}</li>
 

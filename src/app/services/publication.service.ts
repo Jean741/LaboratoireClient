@@ -16,6 +16,10 @@ export class PublicationService {
     return this.httpClient.get<any[]>(API_URL.PUBLICATION_URL);
   }
 
+  getPublicationById(id:number): Observable<Publication> {
+    return this.httpClient.get<any>(API_URL.PUBLICATION_URL+"/"+id);
+  }
+
   getMemberPublication(id:number): Observable<Publication[]> {
     return this.httpClient.get<any[]>(API_URL.PUBLICATION_URL+"/membre/"+id);
   }
@@ -31,8 +35,8 @@ export class PublicationService {
   }
 
 
-  updatePublication(publication:Publication): Observable<any>{
-    return this.httpClient.post<Publication>(API_URL.PUBLICATION_URL,publication)
+  updatePublication(id:number,publication:Publication): Observable<any>{
+    return this.httpClient.put<Publication>(API_URL.PUBLICATION_URL+"/"+id,publication)
   }
 
   deletePublication(id:number): Observable<any>{

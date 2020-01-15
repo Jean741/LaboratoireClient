@@ -1,8 +1,226 @@
-<div class="card">
-  <h5 class="card-header">Featured</h5>
-  <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+<div class="container ">
+  <div class="row">
+
+  </div>
+
+
+  <div class="">
+    <div class="row">
+      <div class ="col-sm-3   mt-5 ">
+        <ul class="sidebar navbar-nav">
+          <li class="nav-item  deep-blue-gradient d-flex justify-content-center">
+            <a class="nav-link"  > <h5>
+              <i class="fa fa-anchor fa-lg" aria-hidden="true"></i>&nbsp;
+              <span class="badge">Gestion des Outils</span></h5>
+            </a>
+          </li>
+
+
+          <mat-expansion-panel class="mat-active mt-2" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Outils
+              </mat-panel-title>
+              <mat-panel-description>
+
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <a  (click)="showRoleForm()"> <h6 class=""><i class="fa fa-plus-square fa-lg" aria-hidden="true"></i>&nbsp;Add New Role</h6></a>
+            <form class="my-2 input-group" *ngIf="roleform" [formGroup]="roleForm">
+              <mat-form-field class="">
+                <input matInput type="text" placeholder=" Role Name" autofocus formControlName="roleName">
+              </mat-form-field >
+              <button mat-button class="btn input-group-append btn-sm btn-success"
+                      (click)="ajouterRole()"
+                      [disabled]="roleForm.pristine||roleForm.invalid"
+
+              > Ajouter</button>
+            </form>
+            <div class="list-group">
+              <a *ngFor="let role of roles"
+
+                 class="list-group-item"  ><i class="fa fa-circle-o-notch " aria-hidden="true"></i>&nbsp;
+                <small> {{role.roleName |uppercase}}</small>
+              </a>
+
+            </div>
+
+
+          </mat-expansion-panel>
+          <mat-card *ngIf="addform" class=" bg-info">
+            <mat-card-header>  </mat-card-header>
+            <mat-card-content>
+              <form  >
+                <mat-form-field>
+                  <input type="text" matInput placeholder="Selectionner un membre" autofocus [matAutocomplete]="auto">
+                </mat-form-field>
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option
+                    *ngFor="let membre of membres"
+                    [value]="membre.id"
+                  >
+                    <a (click)="closeform(membre.id)"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                      {{membre.nom+' '+membre.prenom}}
+                    </a>
+                  </mat-option>
+                </mat-autocomplete>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        </ul>
+      </div>
+
+      <div class="col-md-8 m-auto ">
+
+        <h1 class="my-4">Liste des Outils
+
+        </h1>
+
+
+        <div class="list-group  m-auto">
+          <div class="d-flex justify-content-end m-3  ">
+            <button type="button" class="btn aqua-gradient mr-2 align-content-center" (click)="showPublication()">
+              Creer un Outil   <i class="fa fa-plus fa-lg"></i>
+            </button>
+          </div>
+
+
+
+          <div *ngIf="ajouter" class="card">
+            <div class="card-header">
+              <h5 class="card-title m-auto">Ajouter un Outil</h5>
+
+            </div>
+            <div class="card-body  ">
+              <form [formGroup]="publicationForm">
+                <div>
+                  <mat-form-field >
+                    <mat-label> Type </mat-label>
+                    <mat-select     formControlName="type"  >
+
+                      <mat-option value="Communication">Communication</mat-option>
+                      <mat-option>Sciences</mat-option>
+                      <mat-option>Politique</mat-option>
+                      <mat-option>Eletroniques et ménagers</mat-option>
+
+                    </mat-select>
+
+
+                  </mat-form-field>
+
+
+                  <div class=" form-group">
+                    <label> Lien </label>
+                    <input type="text" class="form-control" formControlName="lien" placeholder="Lien ">
+                  </div>
+                  <div class="form-group">
+                    <label> Source </label>
+                    <input type="text" class="form-control" formControlName="sourcePdf" placeholder="Source">
+                  </div>
+
+
+
+                </div>
+
+              </form>
+
+              <div class="form-group" >
+                <mat-form-field  >
+                  <mat-label>Auteurs</mat-label>
+                  <mat-select [formControl]="listAuteurs" multiple>
+                    <mat-select-trigger>
+                      {{listAuteurs.value ? membres[listAuteurs.value[0]].nom : ''}}
+                      <span *ngIf="listAuteurs.value?.length > 1" class="example-additional-selection">
+        (+{{listAuteurs.value.length - 1}} {{listAuteurs.value?.length === 2 ? 'other' : 'others'}})
+      </span>
+                    </mat-select-trigger>
+
+                    <mat-option *ngFor="let membre of membres" [value]="membre.id">{{membre.nom  + "   " + membre.prenom}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </div>
+            </div>
+            <div class="card-footer d-flex justify-content-lg-around">
+              <button type="button" class="btn col-lg-2 btn-secondary" (click)="annuler()">Annuler</button>
+              <button type="button" class="btn   btn-success" (click)="ajouterPublication()">Publier</button>
+            </div>
+
+          </div>
+          <div class="list-group">
+
+            <!--   <div class="card-body">
+                 <div class="">
+                   <h5 class="card-title">{{publication.type}}
+                   </h5>
+                   <small class="d-flex justify-content-end"><strong class="border rounded-5"> {{publication.dateApparition|date:"short"}}</strong></small>
+
+                    <a class="card-text" href="{{publication.lien}}">{{publication.lien}} </a>
+                   Uploadef from {{publication.sourcePdf}}
+                 </div>
+                 <div class="d-flex flex-row-reverse">
+                   <a  class="btn btn-primary ml-3" (click)="editPublication(publication.id)">Modifier</a>
+                   <a  class="btn btn-danger ml-3"
+                   (click)="deletePublication(publication.id)"
+                   >Supprimer</a>
+
+                 </div>
+               </div> -->
+
+
+
+            <a  class="list-group-item list-group-item-action mt-4 "
+                *ngFor="let publication of publications">
+              <a type="button" class="close badge-pill"  aria-label="Close"
+                 id="dropdownMenuButton" data-toggle="dropdown"
+              >
+                <i class="fa fa-ellipsis-h fa-sm" aria-hidden="true"></i>
+              </a>
+              <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="dropdownMenuButton ">
+                <a class="dropdown-item    rounded-lg  "
+
+                   (click)="editPublication(publication.id)"
+
+                >Edit Publication</a>
+                <a class="dropdown-item   rounded-lg  "
+                   (click)="deletePublication(publication.id)"
+
+                >Delete Publication</a>
+
+              </div>
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{publication.type}}</h5>
+                <small> {{publication.dateApparition|date:"short"}}</small>
+              </div>
+              <p class="mb-1">{{publication.lien}} <br>
+                Uploadef from {{publication.sourcePdf}}
+              </p>
+
+              <mat-expansion-panel class="mat-active mt-2" >
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;
+                    Auteurs
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Consulter les auteurs
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <ul class="list-group list-group-horizontal d-flex justify-content-sm-around">
+                  <li class="list-group-item list-group-item-primary border"
+                      *ngFor="let auteur of publication.auteurs "
+                  >{{auteur.prenom}}&nbsp;{{auteur.nom|uppercase}}</li>
+
+                </ul>
+              </mat-expansion-panel>
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>

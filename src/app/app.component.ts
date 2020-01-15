@@ -8,16 +8,28 @@ import {Router} from '@angular/router';
 })
 export class AppComponent implements OnInit{
   title = 'ClientLaboratoire';
-  conected : boolean =true;
+  conected : boolean =false;
+  admin:boolean=false;
   constructor(private router: Router){
-
+    this.conected =false;
+    this.admin= false;
   }
   ngOnInit(): void {
   }
 
   onConnect(conected){
+
     this.conected = conected;
-    this.router.navigate(['/membres']);
+    if (conected==-1){
+      this.admin=true;
+      this.router.navigate(['/membres']);
+    }
+
+    else{
+      this.router.navigate(['/membres',conected]);
+    }
+
+
   }
 
 }

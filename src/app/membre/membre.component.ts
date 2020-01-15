@@ -15,7 +15,10 @@ export class MembreComponent implements OnInit {
 
    membre:Membre;
    publications:Publication[];
-  constructor(private membreService: MembreService,private publicationService: PublicationService,private formBuilder: FormBuilder,private route:ActivatedRoute) {
+  constructor(private membreService: MembreService,
+              private publicationService: PublicationService,
+              private formBuilder: FormBuilder,
+              private route:ActivatedRoute) {
 
   }
   ngOnInit() {

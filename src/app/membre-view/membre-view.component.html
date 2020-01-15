@@ -1,23 +1,139 @@
+<div class="container">
+<div class="row mt-5 ">
 
-<div class="row ">
+  <div class ="col-sm-3   mt-3 ">
+    <ul class="sidebar navbar-nav">
+      <li class="nav-item  deep-blue-gradient d-flex justify-content-center">
+        <a class="nav-link"  > <h5>
+          <i class="fa fa-anchor fa-lg" aria-hidden="true"></i>&nbsp;
+          <span class="badge">Gestion des Membres</span></h5>
+        </a>
+      </li>
+
+
+      <mat-expansion-panel class="mat-active mt-2" >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Membres
+          </mat-panel-title>
+          <mat-panel-description>
+
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+
+        <div class="list-group">
+          <a
+             class="list-group-item"  ><i class="fa fa-circle-o-notch " aria-hidden="true"></i>&nbsp;
+            Enseignants
+          </a>
+          <a
+             class="list-group-item"  ><i class="fa fa-circle-o-notch " aria-hidden="true"></i>&nbsp;
+            Etudiants
+          </a>
+
+        </div>
+
+
+      </mat-expansion-panel>
+      <mat-card *ngIf="addform" class=" bg-info">
+        <mat-card-header>  </mat-card-header>
+        <mat-card-content>
+          <form  >
+            <mat-form-field>
+              <input type="text" matInput placeholder="Selectionner un membre" autofocus [matAutocomplete]="auto">
+            </mat-form-field>
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let membre of membres"
+                [value]="membre.id"
+              >
+                <a (click)="closeform(membre.id)"><i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                  {{membre.nom+' '+membre.prenom}}
+                </a>
+              </mat-option>
+            </mat-autocomplete>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </ul>
+  </div>
+
   <div class="col-lg-8">
-    <div class="row ">
-      <div class=" col-lg-4 m-3 ">
-        <select class="custom-select custom-select-lg" id="inputGroupSelect01"
-(change)="loadChoise()"
-[(ngModel)]="membretype"
+    <div class="row d-flex justify-content-lg-between my-2 ">
+
+      <div class="col-sm-3">
+        <select class="custom-select " id="inputGroupSelect01"
+                (change)="loadChoise()"
+                [(ngModel)]="membretype"
         >
           <option class="align-content-center rounded" value="0"  >All Members  </option>
           <option class="align-content-center rounded" value="1" selected >Enseignants</option>
           <option class="align-content-center rounded" value="2">Etudiants</option>
         </select>
       </div>
+      <div class="mx-3">
+        <button color="primary"  mat-icon-button data-toggle="modal" data-target="#membreModal" >
+          <i class="fa fa-user-plus fa-3x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="membreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header ">
+              <h3 class="modal-title text-center" id="exampleModalLabel"> <strong>Ajouter un Membre</strong> </h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="membreForm"
+              class="px-2"
+              >
 
+
+                <div class="form-group">
+                  <input type="number" class="form-control" formControlName="cin" placeholder="CIN">
+                </div>
+
+                <div class="alert alert-danger" *ngIf="membreForm.controls['cin'].invalid &&
+     (membreForm.controls['cin'].touched ||membreForm.controls['cin'].dirty)">
+                  Le CIN est Obligatoire
+                </div>
+
+                <div class="form-group">
+                  <input type="text" class="form-control"  formControlName="nom" placeholder="Nom ">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control"  formControlName="prenom" placeholder="Prenom ">
+                </div>
+
+                <div class="form-group">
+                  <input type="email" class="form-control" formControlName="email" placeholder="Email ">
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" formControlName="password"  placeholder="Password ">
+
+                </div>
+
+
+              </form>
+            </div>
+            <div class="modal-footer d-flex justify-content-end">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" (click)="ajouterMembre()" class="btn btn-success"
+                      [disabled]="membreForm.pristine||membreForm.invalid"
+              >Ajouter</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
 
 
-    <div  class="row ml-4">
+    <div  class="m-auto ">
       <table class="table table-hover  table-responsive-sm table-bordered">
         <thead>
         <tr>
@@ -59,56 +175,6 @@
   </div>
 
 
-  <div class="col-lg-4 ">
 
-    <div class="card mt-4  mr-3">
-    <div class="card-header bg-info">
-      Ajouter un Membre
-    </div>
-
-    <div class="card-body">
-
-      <form [formGroup]="membreForm">
-
-
-        <div class="form-group">
-          <input type="number" class="form-control" formControlName="cin" placeholder="CIN">
-        </div>
-
-        <div class="alert alert-danger" *ngIf="membreForm.controls['cin'].invalid &&
-     (membreForm.controls['cin'].touched ||membreForm.controls['cin'].dirty)">
-          Le CIN est Obligatoire
-        </div>
-
-        <div class="form-group">
-          <input type="text" class="form-control"  formControlName="nom" placeholder="Nom ">
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control"  formControlName="prenom" placeholder="Prenom ">
-        </div>
-
-        <div class="form-group">
-          <input type="email" class="form-control" formControlName="email" placeholder="Email ">
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control" formControlName="password"  placeholder="Password ">
-
-         </div>
-
-
-
-
-        <div class="card-footer   bg-transparent">
-          <button type="button" (click)="ajouterMembre()" class="btn btn-success btn-block"
-                  [disabled]="membreForm.pristine||membreForm.invalid"
-          >Ajouter</button>
-
-        </div>
-
-
-      </form>
-    </div>
-  </div>
-  </div>
-
+</div>
 </div>

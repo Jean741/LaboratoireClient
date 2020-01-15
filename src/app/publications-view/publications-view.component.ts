@@ -105,5 +105,8 @@ export class PublicationsViewComponent implements OnInit {
     this.router.navigate(['/publications',id]);
   }
 
+  voirMembre(id:number){
+    this.router.navigate(['/membres',id]);
+  }
 
 }

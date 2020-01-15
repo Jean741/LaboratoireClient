@@ -35,8 +35,15 @@
           <div class="list-group">
             <a *ngFor="let role of roles"
 
-               class="list-group-item"  ><i class="fa fa-circle-o-notch " aria-hidden="true"></i>&nbsp;
+               class="list-group-item d-flex  justify-content-lg-between" >
+
+             <a> <i class="fa fa-circle-o-notch " aria-hidden="true"></i>&nbsp;
               <small> {{role.roleName |uppercase}}</small>
+             </a>
+
+              <a
+                 (click)="deleteRole(role.id)"
+              ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
              </a>
 
           </div>

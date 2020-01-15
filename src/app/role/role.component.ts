@@ -39,6 +39,13 @@ export class RoleComponent implements OnInit {
   }
 
 
+  deleteRole(id :number){
+    this.roleService.deleteRole(id).subscribe(
+      res =>{
+        this.loadRoles();
+      }
+    );
+  }
   showAddForm(idR:number){
     this.addform=true;
     this.roleId=idR

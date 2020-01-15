@@ -14,16 +14,17 @@ export class HomeComponent implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit() {
+    this.startConnect=false;
   }
 
   connect(){
     this.startConnect=true;
-   // this.router.navigate(['/connection']);
+
   }
 
 
-  onConnect(){
-    this.conected=true;
+  onConnect(connet){
+    this.conected=connet;
     this.connectionReussie.emit(this.conected);
   }
 

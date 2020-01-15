@@ -44,4 +44,8 @@ export class RoleService {
   deletePublication(id:number): Observable<any>{
     return this.httpClient.delete(API_URL.ROLE_URL+'/'+id)
   }
+
+  deleteRole(id: number) {
+    return this.httpClient.delete(API_URL.ROLE_URL+'/'+id)
+  }
 }
