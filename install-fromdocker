@@ -1,0 +1,10 @@
+sudo docker rm -f doc-module-api doc-module-client doc-module-postgres
+sudo docker rmi -f freetech4u/doc-module-api:prod freetech4u/doc-module-client:v1.0.0 freetech4u/doc-module-postgres
+
+sudo docker run --name doc-module-postgres -p 5432:5432 --net doc-module-net -e POSTGRES_PASSWORD=aV2lTubodbb589Motu -e POSTGRES_USER=root  -e POSTGRES_DB=documentsDB -v /mnt/doc-module-data:/var/lib/postgresql/data -dit postgres:latest
+
+sudo docker run --name doc-module-api -p 8282:8082 --net doc-module-net -v /mnt/doc-ressources:/resources -e POSTGRES_PASSWORD=aV2lTubodbb589Motu -e POSTGRES_USER=root  -e POSTGRES_HOST=doc-module-postgres -e POSTGRES_PORT=5432 --user root -dit freetech4u/doc-module-api:prod
+
+sudo docker run --name doc-module-client -p 8283:8083 --net doc-module-net --user root -dit freetech4u/doc-module-client:v1.0.0
+
+sudo docker ps
