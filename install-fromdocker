@@ -2,6 +2,7 @@
 mkdir /mnt/doc-ressources
 mkdir /mnt/conf
 
+---------------------------- copy from this -------------------------
 sudo docker rm -f doc-module-api doc-module-client doc-module-postgres
 sudo docker rmi -f freetech4u/doc-module-api:prod freetech4u/doc-module-client:v1.0.0 postgres
 
